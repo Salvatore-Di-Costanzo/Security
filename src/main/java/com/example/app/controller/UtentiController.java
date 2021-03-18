@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -28,9 +31,10 @@ public class UtentiController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request) throws ServletException {
+    public void logout(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
         request.logout();
-        return "home";
+        response.sendRedirect("/index");
+       // return new ModelAndView("redirect:/index");
     }
 
     @GetMapping("/index")
