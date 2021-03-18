@@ -24,6 +24,7 @@ import java.util.List;
 public class UtentiController {
 
     private final UtentiService utentiService;
+    private ModelAndView model;
 
     @Autowired
     private UtentiController ( UtentiService utentiService){
@@ -31,10 +32,12 @@ public class UtentiController {
     }
 
     @GetMapping("/logout")
-    public void logout(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
+    public ModelAndView logout(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
         request.logout();
-        response.sendRedirect("/index");
-       // return new ModelAndView("redirect:/index");
+        //response.sendRedirect("/index");
+        ModelAndView model = new ModelAndView("redirect:/index");
+        model.addObject("name","Pasquale");
+        return model;
     }
 
     @GetMapping("/index")
