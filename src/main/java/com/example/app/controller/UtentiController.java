@@ -25,7 +25,9 @@ public class UtentiController {
 
 
     @GetMapping("/index")
-    public String home(@RequestParam("name") String name,Model model){
+    // in alternativa al required = false possiamo fare
+    // @RequestParam Optional<String> name
+    public String home(@RequestParam(required=false) String name ,Model model){
         model.addAttribute("name",name);
         return "home";
     }
