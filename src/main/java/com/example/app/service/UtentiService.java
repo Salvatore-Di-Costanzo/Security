@@ -16,7 +16,12 @@ public class UtentiService {
     private UtentiService (UtentiRepository utentiRepository){
         this.utentiRepository = utentiRepository;
     }
+
     public List<Utenti> getUtenti () {
         return utentiRepository.findAll();
+    }
+
+    public Utenti getUtente(String nome) {
+        return utentiRepository.findUtentiByNome(nome);
     }
 }

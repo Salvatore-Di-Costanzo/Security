@@ -7,4 +7,6 @@ import java.util.List;
 public interface UtentiRepository extends JpaRepository<Utenti, Integer> {
 
     List<Utenti> findAll();
+
+    Utenti findUtentiByNome(String nome);
 }
