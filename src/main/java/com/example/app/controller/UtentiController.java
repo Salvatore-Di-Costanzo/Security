@@ -5,7 +5,14 @@ import com.example.app.model.Utenti;
 import com.example.app.service.UtentiService;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
+import org.keycloak.KeycloakPrincipal;
+import org.keycloak.KeycloakSecurityContext;
+import org.keycloak.Token;
+import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
+import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +48,12 @@ public class UtentiController {
     }
 
     @GetMapping("/index")
-    public String home(@RequestParam(required = false) String name, Model model, HttpServletRequest request) {
+    public String home(Model model, HttpServletRequest request) {
 
+        KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
+        KeycloakPrincipal principal=(KeycloakPrincipal)token.getPrincipal();
+        KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
+        String name = session.getToken().getPreferredUsername();
 
         model.addAttribute("name", name);
         return "home";
@@ -59,7 +70,7 @@ public class UtentiController {
     public String tokenEKTMOURTENN() throws UnirestException, IOException {
 
 
-        return jsonParser.tokenReader("admin", "admin");
+       return jsonParser.tokenReader("admin", "admin");
     }
 
 
