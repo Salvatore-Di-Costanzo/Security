@@ -1,24 +1,15 @@
 package com.example.app.configuration;
 
 import com.example.app.model.TokenJson;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.keycloak.common.util.Base64;
 import org.springframework.stereotype.Component;
 
-import javax.json.Json;
-import javax.persistence.Column;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 @Slf4j
 @Component
