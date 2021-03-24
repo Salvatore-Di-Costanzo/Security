@@ -62,7 +62,7 @@ public class UtentiController {
 
     @GetMapping("/token")
     @ResponseBody
-    public String tokenEKTMOURTENN() throws UnirestException, IOException {
+    public String token() throws UnirestException, IOException {
 
 
        return jsonParser.tokenReader("admin", "admin");
