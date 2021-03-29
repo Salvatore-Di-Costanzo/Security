@@ -55,8 +55,6 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .hasRole("admin")
                 .antMatchers("/bambini")
                 .hasRole("admin")
-                .antMatchers(" /userByBimbo")
-                .hasRole("admin")
                 .antMatchers("/*")
                 .hasRole("user");
         http.cors().and().csrf().disable();
