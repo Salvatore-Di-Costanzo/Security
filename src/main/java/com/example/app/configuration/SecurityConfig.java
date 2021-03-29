@@ -48,6 +48,8 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/utenti")
                 .hasRole("admin")
+                .antMatchers("/bambini")
+                .hasRole("admin")
                 .antMatchers("/*")
                 .hasRole("user");
     }

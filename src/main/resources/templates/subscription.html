@@ -1,0 +1,39 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="${message}"></p>
+<form th:action="@{/form}" method="post">
+    <hr>
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <input name="Name" class="form-control w-50 m-3"
+               placeholder="name" type="text"/>
+
+        <input name="Surname" class="form-control w-50 m-3"
+               placeholder="surname" type="text"/>
+        <input name="Email" class="form-control w-50 m-3"
+               placeholder="email" type="text"/>
+    </div>
+
+    <div th:if="${param.error}">
+        <div class="col-12 text-center mb-5 text-white">
+            <h3>Nome utente o password errati!</h3>
+        </div>
+    </div>
+
+
+    <hr>
+    <div class="center">
+
+        <button type="submit" class="btn btn-danger btn-lg btn-block m-2">Invia</button>
+
+    </div>
+
+</form>
+</body>
+</html>
+
