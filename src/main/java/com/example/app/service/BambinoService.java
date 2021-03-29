@@ -4,11 +4,11 @@ import com.example.app.model.Bambino;
 import com.example.app.model.Utente;
 import com.example.app.repository.BambinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class BambinoService {
 
     private final BambinoRepository bambinoRepository;

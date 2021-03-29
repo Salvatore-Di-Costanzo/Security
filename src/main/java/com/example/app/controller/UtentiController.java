@@ -1,12 +1,9 @@
 package com.example.app.controller;
 
-import com.example.app.configuration.JsonParser;
 import com.example.app.model.Bambino;
-import com.example.app.model.Subscriber;
 import com.example.app.model.Utente;
 import com.example.app.service.BambinoService;
 import com.example.app.service.UtenteService;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
@@ -22,7 +19,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -31,16 +27,13 @@ import java.util.List;
 public class UtentiController {
 
 
-    private final JsonParser jsonParser;
-
     private final UtenteService utenteService;
 
     private final BambinoService bambinoService;
 
     @Autowired
-    private UtentiController(UtenteService utenteService, JsonParser jsonParser, BambinoService bambinoService) {
+    private UtentiController(UtenteService utenteService, BambinoService bambinoService) {
         this.utenteService = utenteService;
-        this.jsonParser = jsonParser;
         this.bambinoService = bambinoService;
     }
 
@@ -69,27 +62,6 @@ public class UtentiController {
         return "subscription";
     }
 
-    @PostMapping("/form")
-    public String submitForm(@Valid Subscriber subscriber, BindingResult bindingResult, Model m){
-        if(bindingResult.hasErrors()){
-            log.info("{}",bindingResult.getFieldErrors());
-            String error ="";
-            if (bindingResult.hasFieldErrors("name")) {
-                error += "Campo nome errato ";
-            }
-            if (bindingResult.hasFieldErrors("surname")){
-                error += "Campo cognome errato ";
-            }
-            if (bindingResult.hasFieldErrors("email")){
-                error += "Email errata ";
-            }
-            m.addAttribute("message",error);
-            return "subscription";
-        }
-       log.info("Successfully saved person: " + subscriber.toString());
-        return "home";
-    }
-
     @GetMapping("/utenti")
     @ResponseBody
     public List<Utente> getAllUtenti() {
@@ -102,17 +74,20 @@ public class UtentiController {
         return bambinoService.getAllBambini();
     }
 
-    @GetMapping("/userByBimbo")
+    @PostMapping("/userByBimbo")
     @ResponseBody
     public Utente getUtenteByBimbo(@PathParam("id") int id){
         return bambinoService.getUtente(id);
     }
 
-    @GetMapping("/token")
+    @PostMapping("/punteggioUtente")
     @ResponseBody
-    public String token() throws UnirestException, IOException {
+    public int getPunteggioUtente(@PathParam("email") String email) { return utenteService.getPunteggioUtente(email); }
 
-       return jsonParser.tokenReader("admin", "admin");
+    @PostMapping("/setPunteggio")
+    @ResponseBody
+    public void setPunteggioUtente(@PathParam("email") String email, @PathParam("punteggio") int punteggio){
+        utenteService.setPunteggioUtente(email,punteggio);
     }
 
 
