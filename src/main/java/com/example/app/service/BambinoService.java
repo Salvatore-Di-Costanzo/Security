@@ -1,6 +1,5 @@
 package com.example.app.service;
 
-import com.example.app.DTO.UtenteBambino;
 import com.example.app.model.Bambino;
 import com.example.app.repository.BambinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,4 @@ public class BambinoService {
     public List<Bambino> getAllBambini (){
         return bambinoRepository.findAll();
     }
-
-    public List<UtenteBambino> getUtenti () {return new UtenteBambino(bambinoRepository.getUtenti(),bambinoRepository.getUtenti();) }
 }

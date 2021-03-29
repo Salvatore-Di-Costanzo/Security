@@ -1,6 +1,5 @@
 package com.example.app.controller;
 
-import com.example.app.DTO.UtenteBambino;
 import com.example.app.configuration.JsonParser;
 import com.example.app.model.Bambino;
 import com.example.app.model.Subscriber;
@@ -100,12 +99,6 @@ public class UtentiController {
     @ResponseBody
     public List<Bambino> getAllBambini() {
         return bambinoService.getAllBambini();
-    }
-
-    @GetMapping("/getUtentiBambini")
-    @ResponseBody
-    public List<UtenteBambino> getUtentiBambini() {
-        return bambinoService.getUtenti();
     }
 
     @GetMapping("/token")
