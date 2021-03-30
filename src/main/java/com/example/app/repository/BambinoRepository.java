@@ -17,4 +17,7 @@ public interface BambinoRepository extends JpaRepository<Bambino,Integer> {
     @Query("SELECT b.utente from Bambino b where b.id = :id")
     Utente getUtente(@Param("id") int id);
 
+    @Query("select b.utente from Bambino b")
+    List<Utente> getAllUtenti();
+
 }

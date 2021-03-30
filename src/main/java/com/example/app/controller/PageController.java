@@ -44,9 +44,8 @@ public class PageController {
         KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
         KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
         String name = session.getToken().getPreferredUsername();
-
-        model.addAttribute("name", name);
-        model.addAttribute("email", session.getToken().getPhoneNumber());
+        model.addAttribute("Bambini", bambinoService.getAllUtenti());
+        model.addAttribute("name",name);
         return "home";
     }
 
