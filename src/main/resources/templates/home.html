@@ -6,26 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Product list</h1>
-
-<table>
-    <tr>
-        <th>Nome</th>
-        <th>Cognome</th>
-        <th>Utente</th>
-    </tr>
-    <tr th:each="BambiniUtenti : ${Bambini}">
-        <td th:text="${BambiniUtenti.nome}">Nome</td>
-        <td th:text="${BambiniUtenti.cognome}">Cognome</td>
-        <td th:text="${BambiniUtenti.nomeUtente}">Utente</td>
-    </tr>
-</table>
-
-</body>
 <p th:text="'Hello, ' + ${name} + '!'"></p>
 <p th:text="'Email:  ' + ${email}"></p>
 <form id="logout" action="/logout">
     <button type="submit">Logout</button>
 </form>
+<button onclick="location.href = 'ricercaUtenti';" id="myButton" class="float-left submit-button" >Ricerca Utenti</button>
 </body>
 </html>

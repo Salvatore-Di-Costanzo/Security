@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -39,15 +40,19 @@ public class PageController {
 
     @GetMapping("/index")
     public String home(Model model, HttpServletRequest request) {
-
         KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
         KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
         KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
         String name = session.getToken().getPreferredUsername();
-        model.addAttribute("Bambini", bambinoService.getAllUtenti());
-        model.addAttribute("name",name);
         return "home";
     }
+
+    @GetMapping("/ricercaUtenti")
+    public String utenti(Model model){
+        model.addAttribute("Bambini", bambinoService.getAllUtenti());
+        return "utenti";
+    }
+
 
     @GetMapping("/sub")
     public String subscription(Model m) {
