@@ -45,10 +45,10 @@ public class PageController {
         return "home";
     }
 
-    @RequestMapping(path = "/ricercaUtenti", method = RequestMethod.GET)
+    @RequestMapping(path = "/ricercaBambini", method = RequestMethod.GET)
     public String utenti(Model model){
         model.addAttribute("Bambini", bambinoService.getAllUtenti());
-        return "utenti";
+        return "bambini";
     }
 
 

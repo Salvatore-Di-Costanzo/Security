@@ -2,7 +2,8 @@ table.steelBlueCols {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     border: 0px solid #555555;
     background-color: #555555;
-    width: 400px;
+    width: 70%;
+    height: 70%;
     text-align: center;
     border-collapse: collapse;
 }
@@ -11,21 +12,18 @@ table.steelBlueCols td, table.steelBlueCols th {
     padding: 5px 10px;
 }
 table.steelBlueCols tbody td {
-    font-size: 11px;
+    font-size: 18px;
     font-weight: bold;
     color: #FFFFFF;
 }
 table.steelBlueCols tr:nth-child(even) {
     background: #555555;
 }
-table.steelBlueCols td:nth-child(even) {
-    background: #398AA4;
-}
 table.steelBlueCols thead {
     background: #398AA4;
 }
 table.steelBlueCols thead th {
-    font-size: 15px;
+    font-size: 21px;
     font-weight: bold;
     color: #FFFFFF;
     text-align: center;
