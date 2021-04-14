@@ -7,6 +7,10 @@ table.steelBlueCols {
     text-align: center;
     border-collapse: collapse;
 }
+table.steelBlueCols tbody tr:nth-child(even) {
+    background-color: #606060;
+}
+
 table.steelBlueCols td, table.steelBlueCols th {
     border: 0px solid #555555;
     padding: 5px 10px;
@@ -45,4 +49,28 @@ table.steelBlueCols tfoot .links a{
     color: #398AA4;
     padding: 2px 8px;
     border-radius: 5px;
+}
+
+.buttonModifica,
+.buttonElimina{
+    padding: 5px 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: medium;
+    background-color: #398AA4;
+    color: white;
+    margin-right: 2px;
+    transition:all 250ms ease-in;
+}
+
+.buttonModifica:hover,
+.buttonElimina:hover{
+    transform: scale(1.15);
+    background-color: #7eb3c5;
+}
+
+.buttonModifica:focus,
+.buttonElimina:focus{
+    outline: none;
 }

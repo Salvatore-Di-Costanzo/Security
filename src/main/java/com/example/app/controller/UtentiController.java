@@ -1,8 +1,6 @@
 package com.example.app.controller;
 
-import com.example.app.model.Bambino;
 import com.example.app.model.Utente;
-import com.example.app.service.BambinoService;
 import com.example.app.service.UtenteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,27 +15,14 @@ public class UtentiController {
 
     private final UtenteService utenteService;
 
-    private final BambinoService bambinoService;
-
     @Autowired
-    private UtentiController(UtenteService utenteService, BambinoService bambinoService) {
+    private UtentiController(UtenteService utenteService) {
         this.utenteService = utenteService;
-        this.bambinoService = bambinoService;
     }
 
     @GetMapping("/utenti")
     public List<Utente> getAllUtenti() {
         return utenteService.getUtenti();
-    }
-
-    @GetMapping("/bambini")
-    public List<Bambino> getAllBambini() {
-        return bambinoService.getAllBambini();
-    }
-
-    @PostMapping("/userByBimbo")
-    public Utente getUtenteByBimbo(@PathParam("id") int id){
-        return bambinoService.getUtente(id);
     }
 
     @PostMapping("/punteggioUtente")

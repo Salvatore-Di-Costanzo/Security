@@ -1,6 +1,6 @@
 package com.example.app.controller;
 
-import com.example.app.service.BambinoService;
+import com.example.app.model.Utente;
 import com.example.app.service.UtenteService;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.KeycloakPrincipal;
@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @CrossOrigin
 @Slf4j
@@ -21,12 +22,9 @@ public class PageController {
 
     private final UtenteService utenteService;
 
-    private final BambinoService bambinoService;
-
     @Autowired
-    private PageController(UtenteService utenteService, BambinoService bambinoService) {
+    private PageController(UtenteService utenteService) {
         this.utenteService = utenteService;
-        this.bambinoService = bambinoService;
     }
 
     @GetMapping("/logout")
@@ -36,24 +34,52 @@ public class PageController {
         return new ModelAndView("redirect:/index");
     }
 
-    @GetMapping("/index")
-    public String home(Model model, HttpServletRequest request) {
+    @RequestMapping(path = "/home", method = RequestMethod.GET)
+    public String home(Model model, HttpServletRequest request){
         KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
         KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
         KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
-        String name = session.getToken().getPreferredUsername();
-        return "home";
+        String username = session.getToken().getPreferredUsername();
+        Utente utente = utenteService.getUtenteByEmail(username);
+        if(utente != null && session.getToken().getRealmAccess().isUserInRole("admin")) {
+            model.addAttribute("nomeUtente",username);
+            model.addAttribute("Bambini", utenteService.getUtenti());
+            return ("admin");
+        }
+
+        if (utente == null){
+            String name = session.getToken().getGivenName();
+            String surname = session.getToken().getFamilyName();
+            utente = new Utente();
+            utente.setEmail(username.toUpperCase());
+            utente.setNome(name.toUpperCase());
+            utente.setCognome(surname.toUpperCase());
+            utente.setPunteggio(0);
+            utenteService.saveUtente(utente);
+        }
+        model.addAttribute("nomeUtente",utente.getNome() + " " + utente.getCognome());
+        int punteggio = utenteService.getPunteggioUtente(username);
+        String punteggioComposto = "Punteggio: " + punteggio;
+        model.addAttribute("punteggio",punteggioComposto);
+        if(punteggio >= 100 )
+            model.addAttribute("abilita1",true);
+        if(punteggio >= 150 )
+            model.addAttribute("abilita2",true);
+        if(punteggio >= 200 )
+            model.addAttribute("abilita3",true);
+        if(punteggio >= 250 )
+            model.addAttribute("abilita4",true);
+        return "user";
     }
 
-    @RequestMapping(path = "/ricercaBambini", method = RequestMethod.GET)
-    public String utenti(Model model){
-        model.addAttribute("Bambini", bambinoService.getAllUtenti());
-        return "bambini";
-    }
-
-
-    @GetMapping("/sub")
-    public String subscription(Model m) {
-        return "subscription";
+    @PostMapping("/search")
+    public String searchUtenti (@RequestParam("dati")String val,Model model,HttpServletRequest request) {
+        KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
+        KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
+        KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
+        String username = session.getToken().getPreferredUsername();
+        model.addAttribute("nomeUtente", username);
+        model.addAttribute("Bambini", utenteService.searchUtenti(val));
+        return ("admin");
     }
 }

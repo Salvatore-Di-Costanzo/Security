@@ -24,4 +24,9 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
     void setPunteggioUtente(@Param("email") String email, @Param("punteggio") int punteggio);
 
     Utente findUtentiByNome(String nome);
+
+    Utente findUtentiByEmail(String email);
+
+    @Query(value = "select d from Utente d where d.nome=:keyword or d.cognome=:keyword or d.email=:keyword")
+    List<Utente> findByKeyword(@Param("keyword")String keyword);
 }

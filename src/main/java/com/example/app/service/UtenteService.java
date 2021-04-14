@@ -5,6 +5,7 @@ import com.example.app.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,5 +32,17 @@ public class UtenteService {
         int punteggioProvvisorio = utenteRepository.punteggioUtente(email);
         punteggioProvvisorio+=punteggio;
         utenteRepository.setPunteggioUtente(email,punteggioProvvisorio);
+    }
+
+    public Utente getUtenteByEmail (String email){
+        return utenteRepository.findUtentiByEmail(email);
+    }
+
+    public void saveUtente(Utente utente){
+        utenteRepository.save(utente);
+    }
+
+    public List<Utente> searchUtenti (String valore){
+        return utenteRepository.findByKeyword(valore);
     }
 }
