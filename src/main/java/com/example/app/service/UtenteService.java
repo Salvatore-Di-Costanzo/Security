@@ -28,10 +28,13 @@ public class UtenteService {
 
     public int getPunteggioUtente(String email) { return utenteRepository.punteggioUtente(email); }
 
-    public void setPunteggioUtente (String email, int punteggio){
+    public String setPunteggioUtente (String email, int punteggio){
         int punteggioProvvisorio = utenteRepository.punteggioUtente(email);
         punteggioProvvisorio+=punteggio;
+        if(punteggioProvvisorio < 0)
+            return "KO";
         utenteRepository.setPunteggioUtente(email,punteggioProvvisorio);
+        return "OK";
     }
 
     public Utente getUtenteByEmail (String email){

@@ -28,10 +28,5 @@ public class UtentiController {
     @PostMapping("/punteggioUtente")
     public int getPunteggioUtente(@PathParam("email") String email) { return utenteService.getPunteggioUtente(email); }
 
-    @PostMapping("/setPunteggio")
-    public void setPunteggioUtente(@PathParam("email") String email, @PathParam("punteggio") int punteggio){
-        utenteService.setPunteggioUtente(email,punteggio);
-    }
-
 
 }
