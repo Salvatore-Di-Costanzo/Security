@@ -1,28 +1,20 @@
-DROP TABLE IF EXISTS utente;
-DROP TABLE IF EXISTS bambino;
+DROP TABLE IF EXISTS "utente";
 
-CREATE TABLE utente (
-                        email varchar(255) PRIMARY KEY,
---                         cf varchar(13) default NULL,
-                        nome varchar(255) default NULL,
-                        cognome varchar(255) default NULL,
---                        datanascita varchar(255),
---                        luogonascita varchar(255),
---                        cellulare varchar(100) default NULL,
-                        punteggio integer NULL
+CREATE TABLE "utente" (
+                          email varchar(255) PRIMARY KEY,
+                          nome varchar(255) default NULL,
+                          cognome varchar(255) default NULL,
+                          punteggio integer NULL
 );
 
-INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('elit@enimcommodo.co.uk','Oleg','Butler','10-01-2021','Castiglione di Garfagnana','(622) 983-7311',197),('consectetuer.ipsum.nunc@arcuNuncmauris.com','16160519 9015','Asher','Rios','05-01-2020','Castelvecchio Calvisio','(744) 406-8958',149),('porttitor@et.com','16040621 8818','Indigo','Walker','09-19-2021','Vetlanda','(499) 310-5526',230),('Nam@diamDuis.net','16391009 2174','Kevin','Pennington','09-28-2021','Jerzu','(165) 873-5067',176),('egestas.lacinia.Sed@Aliquameratvolutpat.net','16620811 6555','Rhea','Leach','11-25-2020','Kaneohe','(635) 487-6016',107),('lacinia@sociisnatoquepenatibus.org','16790902 2233','Emi','Diaz','02-05-2022','Salon-de-Provence','(152) 574-0883',118),('purus@ligula.co.uk','16970407 3080','Odysseus','Michael','12-25-2021','Friedrichshafen','(982) 421-8041',65),('luctus.ipsum.leo@eratin.com','16270510 7106','Forrest','Savage','06-14-2020','Latinne','(235) 606-8700',37),('dapibus@sodalespurus.org','16250829 8862','Jamalia','Macias','02-24-2022','Helmond','(507) 502-5259',397),('nisi.magna@condimentum.ca','16580613 7344','Camilla','Wise','07-12-2020','Bevilacqua','(775) 790-8880',259);
-
-
-CREATE TABLE "bambino" (
-                           id SERIAL PRIMARY KEY,
-                           nomebambino varchar(255) default NULL,
-                           cognomebambino varchar(255) default NULL,
-                           email varchar(255) default NULL,
-                           CONSTRAINT fk_customer
-                               FOREIGN KEY(email)
-                                   REFERENCES utente(email)
-);
-
-INSERT INTO "bambino" (nomebambino,cognomebambino,email) VALUES ('Zia','Christian','elit@enimcommodo.co.uk'),('Elmo','Dale','consectetuer.ipsum.nunc@arcuNuncmauris.com')
+/*INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('ante.blandit.viverra@imperdietnonvestibulum.co.uk','Kelly','Rivera',9),('eleifend.egestas.Sed@fringillapurus.co.uk','Brynne','Waller',10),('vel.lectus.Cum@eget.org','Ariel','Yates',8),('Nulla@erosProin.ca','Rama','Morin',2),('fermentum.metus.Aenean@dictum.edu','Reece','Bowen',1),('velit.Pellentesque@ullamcorperviverraMaecenas.co.uk','Stephanie','Butler',7),('a.malesuada.id@cursusdiam.net','Damian','Thornton',7),('in@Nullaaliquet.com','Keiko','Johnston',3),('Fusce.mollis@sociis.net','Rae','Ashley',10),('mus.Proin@eu.org','Dakota','Hyde',2);
+INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('aliquam.arcu@elitAliquamauctor.net','Fallon','Roach',3),('Nullam.vitae.diam@atpretium.edu','Kiara','Bowers',9),('Proin@nibhDonecest.ca','Gemma','Horne',7),('Curabitur@Aliquam.ca','Larissa','Colon',8),('Nullam@posuere.co.uk','Walter','Dawson',7),('nulla.at@ipsumSuspendisse.ca','Price','Mejia',4),('Cras@velitAliquam.org','Zelda','Bell',2),('rutrum@viverra.org','Tanya','Snow',2),('massa.non.ante@laciniaSedcongue.org','Brendan','Solomon',10),('eget@Cras.co.uk','Callie','Goodman',5);
+INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('ut.lacus.Nulla@velitQuisque.co.uk','Jade','Reed',5),('arcu@libero.ca','Orlando','Hensley',9),('erat@tinciduntDonecvitae.org','Emi','Whitaker',8),('quis.lectus.Nullam@loremluctusut.com','Leo','Henson',9),('urna.Ut.tincidunt@in.edu','Wynter','Collier',3),('Etiam.gravida@Curabitur.org','Harrison','Golden',2),('Duis@ultrices.com','Tanner','Perry',5),('rutrum.magna.Cras@aarcuSed.ca','Demetrius','Graves',8),('neque.In.ornare@ultricesaauctor.net','Jakeem','Goodwin',1),('lobortis.Class.aptent@pharetra.net','Britanney','Combs',8);
+INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('felis.ullamcorper@egetmassaSuspendisse.ca','Daquan','Rosales',5),('auctor.nunc@Aenean.org','Larissa','Ryan',7),('elit.pellentesque@necmollisvitae.com','Unity','Compton',9),('tristique@Morbi.com','Brynn','Norton',10),('semper.egestas.urna@magna.co.uk','Aimee','Barber',9),('fringilla@nec.com','Clare','Russo',4),('lectus.rutrum@arcuiaculis.ca','Ocean','Richards',8),('Integer.vulputate@Maurisvel.org','Oren','King',8),('Cum.sociis@ligulaNullam.ca','Naida','Soto',9),('amet.consectetuer@auctorveliteget.org','Justine','Floyd',4);
+INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('porttitor@etrutrumeu.org','Curran','Randolph',6),('sem.ut@purus.com','Orson','Le',5),('dictum.augue.malesuada@quamquis.net','Len','Fischer',9),('orci.consectetuer.euismod@nisl.edu','Aristotle','Wilkinson',10),('erat@nuncsit.edu','Galvin','Kramer',4),('felis.ullamcorper@seddui.edu','Gretchen','Levy',2),('risus@egetmetus.com','Echo','Dawson',1),('Nunc@ac.ca','Tasha','Prince',9),('Donec@Nullamlobortisquam.ca','Quentin','Erickson',2),('Nunc.mauris@Integervulputate.co.uk','Karleigh','Vaughan',5);
+INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('luctus@maurisMorbinon.com','Teagan','Monroe',9),('quam.dignissim.pharetra@lorem.co.uk','Bevis','Jacobs',4),('arcu@idrisus.edu','Chloe','Hancock',7),('et@fringillamilacinia.com','Amela','Graves',5),('rutrum.non@arcuMorbisit.edu','Kitra','Bridges',9),('Pellentesque.tincidunt@per.com','Alice','Orr',8),('dignissim@mattissemperdui.co.uk','Gay','Andrews',9),('sem.molestie@pedeblanditcongue.edu','Sonia','Ayala',7),('vehicula.aliquet@bibendum.ca','Kaye','Barr',7),('gravida.nunc@sapiencursusin.net','Chantale','Terry',4);
+INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('tortor.Nunc.commodo@amet.co.uk','Lunea','Ashley',9),('Sed.malesuada@miacmattis.edu','Oleg','Montgomery',10),('semper.tellus@nislNullaeu.com','Kelsie','Mullen',8),('sem.ut.cursus@turpis.co.uk','Azalia','Moreno',2),('magna.et.ipsum@elitpharetraut.ca','September','Kidd',7),('eu@augue.ca','Lillian','Evans',8),('nisi.sem@a.org','Tad','Johnston',5),('eget.metus@ridiculusmus.co.uk','Thane','Craft',5),('enim@Ut.net','Michael','Wooten',2),('Aenean@massaInteger.org','Rahim','French',1);
+INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('Nullam.scelerisque@semperrutrum.net','Guinevere','Fleming',2),('neque@liberoDonec.co.uk','Asher','Booth',7),('neque@mi.org','Ignatius','Farmer',10),('erat.vel.pede@mollisdui.ca','Keelie','Cooper',2),('aptent@Integerid.co.uk','Ralph','Joyce',4),('dapibus.gravida.Aliquam@tincidunt.org','Brianna','Lynn',4),('condimentum.eget@luctusipsum.net','Callie','Sanders',5),('iaculis.lacus@Aliquam.ca','Denton','Guzman',3),('lorem@variuset.com','Tanisha','Cox',6),('lorem.luctus.ut@sem.ca','Fitzgerald','Benton',7);
+INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('nisi@Duisgravida.co.uk','Paula','Mann',3),('sit@liberoettristique.edu','Donna','Emerson',3),('a@Utsemperpretium.co.uk','Sade','Bright',4),('nascetur@Duismi.ca','Mannix','Swanson',2),('tempor@euturpisNulla.org','Garth','Slater',3),('Donec.egestas.Duis@dolorNulla.co.uk','Pascale','Winters',2),('orci.luctus.et@VivamusrhoncusDonec.org','Lana','Hood',3),('risus.Duis@Nunc.net','Emi','Diaz',5),('quis.accumsan@lacus.org','Ruth','Kinney',4),('sem.elit@estmaurisrhoncus.org','Hakeem','Odom',9);
+INSERT INTO "utente" (email,nome,cognome,punteggio) VALUES ('ridiculus.mus.Proin@vulputate.net','Carol','Warner',8),('magna@nisi.edu','Freya','Lowery',3),('ipsum.leo.elementum@et.co.uk','Stacy','Bauer',1),('Vivamus@aliquetodio.com','Grady','Merritt',10),('Nulla.facilisis@ante.edu','Colin','Casey',8),('Donec.tempus@ametrisusDonec.org','Kato','Whitley',2),('euismod@Pellentesquetincidunt.com','Malcolm','Mason',10),('semper.et@diam.com','Rylee','Pate',8),('pulvinar@nuncacmattis.co.uk','Linus','Mccray',10),('Nullam.ut.nisi@auctorveliteget.co.uk','Peter','Patterson',3);
+*/
