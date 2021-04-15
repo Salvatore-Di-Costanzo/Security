@@ -21,3 +21,17 @@ CREATE TABLE "sequenziale"
 );
 INSERT INTO "sequenziale" (id, numero)
 VALUES (1, 0);
+
+DROP TABLE IF EXISTS "negozio";
+
+CREATE TABLE "negozio"
+(
+    id     integer PRIMARY KEY,
+    nomenegozio varchar(255) default NULL,
+    categoria varchar(255) default NULL,
+    email varchar(255) default NULL
+
+);
+INSERT INTO "negozio" (id, nomenegozio,categoria,email)
+VALUES (0, 'Fior Di Latte','bottone1','perlabinca@hotmail.it');
+

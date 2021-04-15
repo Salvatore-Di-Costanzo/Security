@@ -1,9 +1,12 @@
 package com.example.app.controller;
 
 import com.example.app.dto.Bottone;
+import com.example.app.dto.SequenzialeField;
+import com.example.app.model.Negozio;
 import com.example.app.model.Sequenziale;
 import com.example.app.model.Utente;
 import com.example.app.repository.SequenzialeRepository;
+import com.example.app.service.NegozioService;
 import com.example.app.service.UtenteService;
 import com.example.app.util.Mail;
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +30,12 @@ public class UtentiController {
 
     private final UtenteService utenteService;
     private final Map<String, Integer> mappa = new HashMap<>();
+    private final NegozioService negozioService;
 
     @Autowired
-    private UtentiController(UtenteService utenteService) {
+    private UtentiController(UtenteService utenteService, NegozioService negozioService) {
         this.utenteService = utenteService;
+        this.negozioService = negozioService;
         mappa.put("bottone1", -100);
         mappa.put("bottone2", -150);
         mappa.put("bottone3", -200);
@@ -57,8 +62,12 @@ public class UtentiController {
         return "success";
     }
     @PostMapping("/invioMail")
-    public void invioMail(@RequestBody Bottone bottone){
-        Mail.sendMail("emaildestinatario",Integer.parseInt(bottone.getBottone()));
+    public void invioMail(@RequestBody SequenzialeField sequenziale, @RequestBody Bottone categoria){
+        List<Negozio> negozi = negozioService.findAllbyCategoria(categoria.getBottone());
+        for(Negozio negozio : negozi){
+            Mail.sendMail(negozio.getEmail(),Integer.parseInt(sequenziale.getSequenziale()));
+        }
+
     }
 
 

@@ -162,8 +162,24 @@
                     doc.setTextColor(0, 0, 0);
                     doc.text(380, 360, "#" + num, null, 270);
                     doc.save('Buono_'+num+'.pdf');
+                    setTimeout(function(){
+                        //do what you need here
+                    }, 1000);
+                    jQuery.ajax({
+                        type: 'POST',
+                        url: '/invioMail',
+                        data: JSON.stringify({sequenziale: num, bottone: bottone}),
+                        contentType: 'application/json; charset=utf-8',
+                        success: function () {
+                            console.log("GG");
+                        },
 
-                    window.location.href = "/home";
+                        error: function () {
+                            console.log("errore invio mail");
+                        }
+                    });
+
+                    //window.location.href = "/home";
 
                 },
 
@@ -172,20 +188,7 @@
                 }
             });
 
-            jQuery.ajax({
-                type: 'POST',
-                url: '/invioMail',
-                data: JSON.stringify({bottone: jQuery('#sequenziale').text()}),
-                contentType: 'application/json; charset=utf-8',
-                success: function () {
 
-                    console.log("GG");
-                },
-
-                error: function () {
-                    console.log("errore invio mail");
-                }
-            });
 
         }
     </script>
