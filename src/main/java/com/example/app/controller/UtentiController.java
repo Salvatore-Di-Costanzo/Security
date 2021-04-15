@@ -5,6 +5,7 @@ import com.example.app.model.Sequenziale;
 import com.example.app.model.Utente;
 import com.example.app.repository.SequenzialeRepository;
 import com.example.app.service.UtenteService;
+import com.example.app.util.Mail;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
@@ -45,7 +46,7 @@ public class UtentiController {
     public int getPunteggioUtente(@PathParam("email") String email) { return utenteService.getPunteggioUtente(email); }
 
     @PostMapping("/updatePunteggio")
-    public String ciao(HttpServletRequest request,@RequestBody Bottone bottone) {
+    public String updatePunteggio(HttpServletRequest request, @RequestBody Bottone bottone) {
 
         KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
         KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
@@ -53,9 +54,13 @@ public class UtentiController {
         String username = session.getToken().getPreferredUsername().toUpperCase();
 
         utenteService.setPunteggioUtente(username,mappa.get(bottone.getBottone()));
-
         return "success";
     }
+    @PostMapping("/invioMail")
+    public void invioMail(@RequestBody Bottone bottone){
+        Mail.sendMail("emaildestinatario",Integer.parseInt(bottone.getBottone()));
+    }
+
 
 }
 

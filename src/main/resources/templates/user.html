@@ -133,7 +133,6 @@
 
         function scaricaBuono() {
             let bottone = jQuery('#idHolder').text()
-            console.log(bottone);
             jQuery.ajax({
                 type: 'POST',
                 url: '/updatePunteggio',
@@ -151,7 +150,6 @@
                     let scadenza = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
                     let nomeUtente = $("#nomeUtente").text();
                     let num = jQuery('#sequenziale').text();
-                    console.log(num)
                     doc.setFontSize(8)
                     doc.setTextColor(255, 255, 255);
                     doc.setFont("releway");
@@ -163,13 +161,29 @@
                     doc.setFontSize(20)
                     doc.setTextColor(0, 0, 0);
                     doc.text(380, 360, "#" + num, null, 270);
-                    doc.save('Buono.pdf');
+                    doc.save('Buono_'+num+'.pdf');
+
                     window.location.href = "/home";
 
                 },
 
                 error: function () {
                     console.log("5 e mezza");
+                }
+            });
+
+            jQuery.ajax({
+                type: 'POST',
+                url: '/invioMail',
+                data: JSON.stringify({bottone: jQuery('#sequenziale').text()}),
+                contentType: 'application/json; charset=utf-8',
+                success: function () {
+
+                    console.log("GG");
+                },
+
+                error: function () {
+                    console.log("errore invio mail");
                 }
             });
 

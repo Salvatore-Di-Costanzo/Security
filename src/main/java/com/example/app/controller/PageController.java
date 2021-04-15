@@ -1,9 +1,11 @@
 package com.example.app.controller;
 
+import com.example.app.dto.Bottone;
 import com.example.app.model.Sequenziale;
 import com.example.app.model.Utente;
 import com.example.app.repository.SequenzialeRepository;
 import com.example.app.service.UtenteService;
+import com.example.app.util.Mail;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
@@ -79,12 +81,13 @@ public class PageController {
             model.addAttribute("abilita4", true);
 
         Sequenziale sequenziale = sequenzialeRepository.findById(1);
-        sequenziale.setNumero(sequenziale.getNumero()+1);
+        sequenziale.setNumero(sequenziale.getNumero() + 1);
         sequenzialeRepository.save(sequenziale);
-
-        model.addAttribute("sequenziale",sequenziale.getNumero());
+        model.addAttribute("sequenziale", sequenziale.getNumero());
         return "user";
     }
+
+
 
     @PostMapping("/search")
     public String searchUtenti(@RequestParam("dati") String val, Model model, HttpServletRequest request) {
@@ -104,8 +107,12 @@ public class PageController {
         KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
         String username = session.getToken().getPreferredUsername();
         model.addAttribute("nomeUtente", username);
-        if (utenteService.setPunteggioUtente(email, punteggio).equals("OK"))
-            return "success";
+        if (email != null) {
+            if (utenteService.setPunteggioUtente(email, punteggio).equals("OK"))
+                return "success";
+            else
+                return "fail";
+        }
         else
             return "fail";
     }
