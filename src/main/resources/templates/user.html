@@ -14,12 +14,11 @@
 <nav class="navbar navbar-light" style="background-color: #398AA4;">
     <span id="nomeUtente" class="navbar-brand mb-0 h1 text-light" th:text="${nomeUtente}"></span>
     <span class="navbar-brand mb-0 h1 text-light" th:text="${punteggio}"></span>
-    <span id="sequenziale" class="invisible" th:text="${sequenziale}"></span>
     <a class="navbar-brand mb-0 h1 text-light" href="/logout">Logout</a>
 </nav>
 
 <div class="d-flex flex-wrap" style="justify-content: space-evenly;">
-
+    <span id="sequenziale" class="invisible" th:text="${sequenziale}"></span>
     <div class="card rounded-3 mt-5" style="width: 25rem;">
         <img class="card-img-top"
              src="https://www.zooprezzi.it/content/images/thumbs/0002252_buono-regalo-gift-card.jpeg"
