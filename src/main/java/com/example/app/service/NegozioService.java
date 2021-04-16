@@ -20,4 +20,20 @@ public class NegozioService {
     public List<Negozio> findAllbyCategoria (String categoria){
         return negozioRepository.findAllByCategoria(categoria);
     }
+
+    public List<Negozio> findAll(){
+        return negozioRepository.findAll();
+    }
+
+    public Negozio findById(int id){
+        return negozioRepository.findById(id);
+    }
+
+    public void saveNegozio(Negozio negozio){
+        negozioRepository.save(negozio);
+    }
+
+    public Long deleteById(int id){
+        return negozioRepository.deleteById(id);
+    }
 }

@@ -1,11 +1,9 @@
 package com.example.app.controller;
 
 import com.example.app.dto.Bottone;
-import com.example.app.dto.SequenzialeField;
+import com.example.app.dto.InvioMailFields;
 import com.example.app.model.Negozio;
-import com.example.app.model.Sequenziale;
 import com.example.app.model.Utente;
-import com.example.app.repository.SequenzialeRepository;
 import com.example.app.service.NegozioService;
 import com.example.app.service.UtenteService;
 import com.example.app.util.Mail;
@@ -14,7 +12,6 @@ import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,10 +59,10 @@ public class UtentiController {
         return "success";
     }
     @PostMapping("/invioMail")
-    public void invioMail(@RequestBody SequenzialeField sequenziale, @RequestBody Bottone categoria){
-        List<Negozio> negozi = negozioService.findAllbyCategoria(categoria.getBottone());
+    public void invioMail(@RequestBody InvioMailFields invioMailFields){
+        List<Negozio> negozi = negozioService.findAllbyCategoria(invioMailFields.getBottone());
         for(Negozio negozio : negozi){
-            Mail.sendMail(negozio.getEmail(),Integer.parseInt(sequenziale.getSequenziale()));
+            Mail.sendMail(negozio.getEmail(),Integer.parseInt(invioMailFields.getSequenziale()));
         }
 
     }

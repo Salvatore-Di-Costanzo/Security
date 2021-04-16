@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface NegozioRepository extends JpaRepository<Negozio,Integer> {
     List<Negozio> findAllByCategoria (String categoria);
+    List<Negozio> findAll ();
+    Negozio findById(int id);
+    Long deleteById(int id);
 }

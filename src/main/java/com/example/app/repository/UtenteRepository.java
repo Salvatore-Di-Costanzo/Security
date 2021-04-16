@@ -29,4 +29,8 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
 
     @Query(value = "select d from Utente d where d.nome=:keyword or d.cognome=:keyword or d.email=:keyword")
     List<Utente> findByKeyword(@Param("keyword")String keyword);
+
+    @Transactional
+    @Modifying
+    String deleteByEmail(String email);
 }

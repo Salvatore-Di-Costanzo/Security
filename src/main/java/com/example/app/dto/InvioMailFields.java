@@ -2,7 +2,10 @@ package com.example.app.dto;
 
 import lombok.Getter;
 
-public class SequenzialeField {
+public class InvioMailFields {
+
+    @Getter
+    private String bottone;
 
     @Getter
     private String sequenziale;

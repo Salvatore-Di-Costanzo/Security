@@ -1,9 +1,11 @@
 package com.example.app.controller;
 
 import com.example.app.dto.Bottone;
+import com.example.app.model.Negozio;
 import com.example.app.model.Sequenziale;
 import com.example.app.model.Utente;
 import com.example.app.repository.SequenzialeRepository;
+import com.example.app.service.NegozioService;
 import com.example.app.service.UtenteService;
 import com.example.app.util.Mail;
 import lombok.extern.slf4j.Slf4j;
@@ -28,11 +30,13 @@ public class PageController {
 
     private final UtenteService utenteService;
     private final SequenzialeRepository sequenzialeRepository;
+    private final NegozioService negozioService;
 
     @Autowired
-    private PageController(UtenteService utenteService, SequenzialeRepository sequenzialeRepository) {
+    private PageController(UtenteService utenteService, SequenzialeRepository sequenzialeRepository, NegozioService negozioService) {
         this.utenteService = utenteService;
         this.sequenzialeRepository = sequenzialeRepository;
+        this.negozioService = negozioService;
     }
 
     @GetMapping("/logout")
@@ -53,7 +57,7 @@ public class PageController {
             model.addAttribute("nomeUtente", username);
             List<Utente> utenti = utenteService.getUtenti();
             utenti.remove(utente);
-            model.addAttribute("Bambini", utenti);
+            model.addAttribute("Utenti", utenti);
             return ("admin");
         }
 
@@ -88,7 +92,6 @@ public class PageController {
     }
 
 
-
     @PostMapping("/search")
     public String searchUtenti(@RequestParam("dati") String val, Model model, HttpServletRequest request) {
         KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
@@ -112,9 +115,73 @@ public class PageController {
                 return "success";
             else
                 return "fail";
-        }
-        else
+        } else
             return "fail";
+    }
+
+    @RequestMapping(path = "/elencoNegozi", method = RequestMethod.GET)
+    public String elencoNegozi(Model model, HttpServletRequest request) {
+        KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
+        KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
+        KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
+        String username = session.getToken().getPreferredUsername().toUpperCase();
+        model.addAttribute("nomeUtente", username);
+        List<Negozio> negozi = negozioService.findAll();
+        model.addAttribute("Negozi", negozi);
+        return "gestioneNegozio";
+
+    }
+
+    @PostMapping("/modificaNegozio")
+    public String modificaNegozio(@PathParam("id") int id, HttpServletRequest request, Model model) {
+        KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
+        KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
+        KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
+        String username = session.getToken().getPreferredUsername();
+        model.addAttribute("nomeUtente", username);
+        Negozio negozio = negozioService.findById(id);
+        model.addAttribute("negozio", negozio);
+        return "editForm";
+    }
+
+    @PostMapping("/sendEditedStore")
+    public String sendEditedStore(@PathParam("negozio")Negozio negozio) {
+        try {
+            negozioService.saveNegozio(negozio);
+            return "success";
+        } catch (Exception e) {
+            return "fail";
+        }
+    }
+
+    @PostMapping("/eliminaNegozio")
+    public String eliminaNegozio(@PathParam("id") int id) {
+        try {
+            negozioService.deleteById(id);
+            return "success";
+        } catch (Exception e) {
+            return "fail";
+        }
+    }
+
+    @GetMapping("/returnEditPage")
+    public String returnEditPage(HttpServletRequest request, Model model,Negozio negozio){
+        KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
+        KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
+        KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
+        String username = session.getToken().getPreferredUsername();
+        model.addAttribute("nomeUtente", username);
+        return "editForm";
+    }
+
+    @PostMapping("/eliminaUtente")
+    public String eliminaUtente(@PathParam("email") String email){
+        try {
+            utenteService.deleteUtenteByEmail(email);
+            return "success";
+        } catch (Exception e) {
+            return "fail";
+        }
     }
 
 }

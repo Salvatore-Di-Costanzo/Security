@@ -47,4 +47,8 @@ public class UtenteService {
     public List<Utente> searchUtenti (String valore){
         return utenteRepository.findByKeyword(valore);
     }
+
+    public String deleteUtenteByEmail(String email){
+        return utenteRepository.deleteByEmail(email);
+    }
 }
