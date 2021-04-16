@@ -3,8 +3,10 @@ package com.example.app.controller;
 import com.example.app.dto.Bottone;
 import com.example.app.dto.InvioMailFields;
 import com.example.app.model.Negozio;
+import com.example.app.model.Tipo;
 import com.example.app.model.Utente;
 import com.example.app.service.NegozioService;
+import com.example.app.service.TipoService;
 import com.example.app.service.UtenteService;
 import com.example.app.util.Mail;
 import lombok.extern.slf4j.Slf4j;
@@ -28,15 +30,17 @@ public class UtentiController {
     private final UtenteService utenteService;
     private final Map<String, Integer> mappa = new HashMap<>();
     private final NegozioService negozioService;
+    private final TipoService tipoService;
 
     @Autowired
-    private UtentiController(UtenteService utenteService, NegozioService negozioService) {
+    private UtentiController(UtenteService utenteService, NegozioService negozioService,TipoService tipoService) {
         this.utenteService = utenteService;
         this.negozioService = negozioService;
         mappa.put("bottone1", -100);
         mappa.put("bottone2", -150);
         mappa.put("bottone3", -200);
         mappa.put("bottone4", -250);
+        this.tipoService = tipoService;
     }
 
     @GetMapping("/utenti")
@@ -65,6 +69,11 @@ public class UtentiController {
             Mail.sendMail(negozio.getEmail(),Integer.parseInt(invioMailFields.getSequenziale()));
         }
 
+    }
+
+    @PostMapping("/getTipi")
+    public List<Tipo> findAll(){
+        return tipoService.findAll();
     }
 
 

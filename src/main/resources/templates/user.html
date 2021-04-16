@@ -162,6 +162,8 @@
                     doc.setTextColor(0, 0, 0);
                     doc.text(380, 360, "#" + num, null, 270);
                     doc.save('Buono_'+num+'.pdf');
+                    setTimeout(function(){
+                    }, 500);
                     jQuery.ajax({
                         type: 'POST',
                         url: '/invioMail',
@@ -173,8 +175,10 @@
                         error: function () {
                         }
                     });
-
-                    //window.location.href = "/home";
+                    setTimeout(function(){
+                        //Pierd o tiemp
+                    }, 500);
+                    window.location.href = "/home";
 
                 },
 

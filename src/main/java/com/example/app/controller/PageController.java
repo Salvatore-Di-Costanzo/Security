@@ -3,9 +3,11 @@ package com.example.app.controller;
 import com.example.app.dto.Bottone;
 import com.example.app.model.Negozio;
 import com.example.app.model.Sequenziale;
+import com.example.app.model.Tipo;
 import com.example.app.model.Utente;
 import com.example.app.repository.SequenzialeRepository;
 import com.example.app.service.NegozioService;
+import com.example.app.service.TipoService;
 import com.example.app.service.UtenteService;
 import com.example.app.util.Mail;
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +33,14 @@ public class PageController {
     private final UtenteService utenteService;
     private final SequenzialeRepository sequenzialeRepository;
     private final NegozioService negozioService;
+    private final TipoService tipoService;
 
     @Autowired
-    private PageController(UtenteService utenteService, SequenzialeRepository sequenzialeRepository, NegozioService negozioService) {
+    private PageController(UtenteService utenteService, SequenzialeRepository sequenzialeRepository, NegozioService negozioService, TipoService tipoService) {
         this.utenteService = utenteService;
         this.sequenzialeRepository = sequenzialeRepository;
         this.negozioService = negozioService;
+        this.tipoService = tipoService;
     }
 
     @GetMapping("/logout")
@@ -141,6 +145,7 @@ public class PageController {
         model.addAttribute("nomeUtente", username);
         Negozio negozio = negozioService.findById(id);
         model.addAttribute("negozio", negozio);
+        model.addAttribute("listTipo",tipoService.findAll());
         return "editForm";
     }
 
@@ -171,6 +176,7 @@ public class PageController {
         KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
         String username = session.getToken().getPreferredUsername();
         model.addAttribute("nomeUtente", username);
+        model.addAttribute("listTipo",tipoService.findAll());
         return "editForm";
     }
 

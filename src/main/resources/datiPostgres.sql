@@ -35,3 +35,14 @@ CREATE TABLE "negozio"
 INSERT INTO "negozio" (id, nomenegozio,categoria,email)
 VALUES (0, 'Fior Di Latte','bottone1','perlabinca@hotmail.it');
 
+DROP TABLE IF EXISTS "tipo";
+
+CREATE TABLE "tipo"
+(
+    id     integer PRIMARY KEY,
+    tipo varchar(255) default NULL
+
+);
+INSERT INTO "tipo" (id, tipo)
+VALUES (0, 'mozzarella'),(1,'pizza');
+
