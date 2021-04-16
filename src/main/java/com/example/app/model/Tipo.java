@@ -11,9 +11,9 @@ public class Tipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(name="id")
     private int id;
 
-    @Column
+    @Column(name="tipo")
     private String tipo;
 }

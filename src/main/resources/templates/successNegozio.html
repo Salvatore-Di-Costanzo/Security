@@ -7,13 +7,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
     <meta charset="UTF-8">
 
-    <title>Gestione</title>
+    <title>Home</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #398AA4;">
     <span id="nomeUtente" class="navbar-brand mb-0 h1 text-light" th:text="${nomeUtente}">Navbar</span>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -23,8 +22,7 @@
                 <a class="nav-link text-light" href="/home">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Altre Opzioni
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -32,37 +30,19 @@
                 </div>
             </li>
         </ul>
-        <a class="navbar-brand mb-0 h1 text-light" href="/logout">Logout</a>
     </div>
+    <a class="navbar-brand mb-0 h1 text-light" href="/logout">Logout</a>
 </nav>
-<div class="d-flex justify-content-center">
-    <form class="formEdit" th:object="${negozio}" th:action="@{/sendEditedStore}" method="post">
-        <div class="form-group">
-            <label hidden for="id">Id</label>
-            <input hidden type="text" class="form-control" id="id" th:placeholder="${negozio.id}" th:field="*{id}">
-        </div>
-        <div class="form-group">
-            <label for="nomeNegozio">Nome Negozio</label>
-            <input type="text" class="form-control" id="NomeNegozio" th:placeholder="${negozio.nomeNegozio}" th:field="*{nomeNegozio}">
-        </div>
-        <div class="form-group">
-            <label for="categoria">Categoria</label>
-            <select class="form-control" id="categoria" th:field="*{categoria}">
-                <option th:each="tipo : ${tipi}"
-                        th:value="${tipo.tipo}"
-                        th:text="${tipo.tipo}"
-                        th:selected="${tipo.tipo == negozio.categoria}"
-                        value="">
-                </option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" th:placeholder="${negozio.email}" th:field="*{email}">
-        </div>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Inserisci</button>
-    </form>
+
+
+<div class="messaggio alert alert-success w-50 h-50 text-center" role="alert">
+    <h4 class="alert-heading">Dati aggiornati correttamente!</h4>
+    <p>Clicca qui sotto per tornare alla home</p>
+    <hr>
+    <a class="btn btn-success" href="/elencoNegozi">Home</a>
 </div>
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

@@ -16,7 +16,8 @@ public class TipoService {
         this.tipoRepository = tipoRepository;
     }
 
-    public List<Tipo> findAll(){
-        return tipoRepository.findAll();
+
+    public List<Tipo> getAllTipo(){
+        return tipoRepository.getAllTipo();
     }
 }

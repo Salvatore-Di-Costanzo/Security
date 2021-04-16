@@ -36,10 +36,10 @@ public class UtentiController {
     private UtentiController(UtenteService utenteService, NegozioService negozioService,TipoService tipoService) {
         this.utenteService = utenteService;
         this.negozioService = negozioService;
-        mappa.put("bottone1", -100);
-        mappa.put("bottone2", -150);
-        mappa.put("bottone3", -200);
-        mappa.put("bottone4", -250);
+        mappa.put("caseificio", -100);
+        mappa.put("pizzeria", -150);
+        mappa.put("pasticceria", -200);
+        mappa.put("panificio", -250);
         this.tipoService = tipoService;
     }
 
@@ -73,7 +73,7 @@ public class UtentiController {
 
     @PostMapping("/getTipi")
     public List<Tipo> findAll(){
-        return tipoService.findAll();
+        return tipoService.getAllTipo();
     }
 
 
