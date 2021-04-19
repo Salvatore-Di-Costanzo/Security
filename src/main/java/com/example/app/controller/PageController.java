@@ -1,9 +1,11 @@
 package com.example.app.controller;
 
+import com.example.app.model.Buono;
 import com.example.app.model.Negozio;
 import com.example.app.model.Sequenziale;
 import com.example.app.model.Utente;
 import com.example.app.repository.SequenzialeRepository;
+import com.example.app.service.BuonoService;
 import com.example.app.service.NegozioService;
 import com.example.app.service.TipoService;
 import com.example.app.service.UtenteService;
@@ -31,13 +33,15 @@ public class PageController {
     private final SequenzialeRepository sequenzialeRepository;
     private final NegozioService negozioService;
     private final TipoService tipoService;
+    private final BuonoService buonoService;
 
     @Autowired
-    private PageController(UtenteService utenteService, SequenzialeRepository sequenzialeRepository, NegozioService negozioService, TipoService tipoService) {
+    private PageController(UtenteService utenteService, SequenzialeRepository sequenzialeRepository, NegozioService negozioService, TipoService tipoService, BuonoService buonoService) {
         this.utenteService = utenteService;
         this.sequenzialeRepository = sequenzialeRepository;
         this.negozioService = negozioService;
         this.tipoService = tipoService;
+        this.buonoService = buonoService;
     }
 
     @GetMapping("/logout")
@@ -185,6 +189,12 @@ public class PageController {
         } catch (Exception e) {
             return "fail";
         }
+    }
+
+    @GetMapping("/delete/{idBuono}")
+    public String consumaBuono(@PathVariable String idBuono){
+        buonoService.deleteById(Integer.parseInt(idBuono));
+        return "success";
     }
 
 }

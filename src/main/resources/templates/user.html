@@ -166,6 +166,17 @@
                     }, 500);
                     jQuery.ajax({
                         type: 'POST',
+                        url: '/insertBuono',
+                        data: JSON.stringify({numeroBuono: num,nomeUtente: nomeUtente, tipologia:bottone}),
+                        contentType: 'application/json; charset=utf-8',
+                        success: function () {
+                        },
+
+                        error: function () {
+                        }
+                    });
+                    jQuery.ajax({
+                        type: 'POST',
                         url: '/invioMail',
                         data: JSON.stringify({sequenziale: num, bottone: bottone}),
                         contentType: 'application/json; charset=utf-8',

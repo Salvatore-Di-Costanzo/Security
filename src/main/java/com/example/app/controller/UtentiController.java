@@ -1,10 +1,13 @@
 package com.example.app.controller;
 
 import com.example.app.dto.Bottone;
+import com.example.app.dto.BuonoDaRegistrare;
 import com.example.app.dto.InvioMailFields;
+import com.example.app.model.Buono;
 import com.example.app.model.Negozio;
 import com.example.app.model.Tipo;
 import com.example.app.model.Utente;
+import com.example.app.service.BuonoService;
 import com.example.app.service.NegozioService;
 import com.example.app.service.TipoService;
 import com.example.app.service.UtenteService;
@@ -31,9 +34,10 @@ public class UtentiController {
     private final Map<String, Integer> mappa = new HashMap<>();
     private final NegozioService negozioService;
     private final TipoService tipoService;
+    private final BuonoService buonoService;
 
     @Autowired
-    private UtentiController(UtenteService utenteService, NegozioService negozioService,TipoService tipoService) {
+    private UtentiController(UtenteService utenteService, NegozioService negozioService,TipoService tipoService,BuonoService buonoService) {
         this.utenteService = utenteService;
         this.negozioService = negozioService;
         mappa.put("caseificio", -100);
@@ -41,6 +45,7 @@ public class UtentiController {
         mappa.put("pasticceria", -200);
         mappa.put("panificio", -250);
         this.tipoService = tipoService;
+        this.buonoService = buonoService;
     }
 
     @GetMapping("/utenti")
@@ -74,6 +79,15 @@ public class UtentiController {
     @PostMapping("/getTipi")
     public List<Tipo> findAll(){
         return tipoService.getAllTipo();
+    }
+
+    @PostMapping("/insertBuono")
+    public void inserisciBuono(@RequestBody BuonoDaRegistrare buonoDaRegistrare){
+        Buono buono = new Buono();
+        buono.setId(buonoDaRegistrare.getNumeroBuono());
+        buono.setBeneficiario(buonoDaRegistrare.getNomeUtente());
+        buono.setTipologia(buonoDaRegistrare.getTipologia());
+        buonoService.save(buono);
     }
 
 

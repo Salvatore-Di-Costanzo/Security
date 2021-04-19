@@ -46,3 +46,15 @@ CREATE TABLE "tipo"
 INSERT INTO "tipo" (id, tipo)
 VALUES (0, 'mozzarella'),(1,'pizza');
 
+
+
+DROP TABLE IF EXISTS "buono";
+
+CREATE TABLE "buono"
+(
+    id     integer PRIMARY KEY,
+    beneficiario varchar(255) default NULL,
+    tipologia varchar(255) default NULL
+
+);
+
