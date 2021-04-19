@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -193,7 +194,9 @@ public class PageController {
 
     @GetMapping("/delete/{idBuono}")
     public String consumaBuono(@PathVariable String idBuono){
-        buonoService.deleteById(Integer.parseInt(idBuono));
+        byte[] decodedBytes = Base64.getDecoder().decode(idBuono);
+        String decodedId = new String(decodedBytes);
+        buonoService.deleteById(Integer.parseInt(decodedId));
         return "success";
     }
 

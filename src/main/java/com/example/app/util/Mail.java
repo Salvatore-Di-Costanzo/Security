@@ -1,6 +1,7 @@
 package com.example.app.util;
 import java.io.File;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -71,10 +72,9 @@ public class Mail {
             try {
 
                 File f =new File(PATH+"\\Downloads\\Buono_"+numBuono+".pdf");
-
                 attachmentPart.attachFile(f);
                 textPart.setText("Salve, in allegato il buono genrato per usufruire della promozione\n");
-                String html = "Clicca qui sotto per consumare il buono quando il cliente lo mostra in negozio\n <a href='http://localhost:8080/delete/"+numBuono+"'>Consuma il Buono</a>";
+                String html = "Clicca qui sotto per consumare il buono quando il cliente lo mostra in negozio\n <a href='http://localhost:8080/delete/"+ Base64.getEncoder().encodeToString(String.valueOf(numBuono).getBytes())+"'>Consuma il Buono</a>";
                 textPart.setText(html, "UTF-8", "html");
                 multipart.addBodyPart(textPart);
                 multipart.addBodyPart(attachmentPart);
