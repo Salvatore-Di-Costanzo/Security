@@ -1,0 +1,76 @@
+table.steelBlueCols {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    border: 0px solid #555555;
+    background-color: #555555;
+    width: 70%;
+    height: 70%;
+    text-align: center;
+    border-collapse: collapse;
+}
+table.steelBlueCols tbody tr:nth-child(even) {
+    background-color: #606060;
+}
+
+table.steelBlueCols td, table.steelBlueCols th {
+    border: 0px solid #555555;
+    padding: 5px 10px;
+}
+table.steelBlueCols tbody td {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+table.steelBlueCols tr:nth-child(even) {
+    background: #555555;
+}
+table.steelBlueCols thead {
+    background: #398AA4;
+}
+table.steelBlueCols thead th {
+    font-size: 21px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 0px solid #398AA4;
+}
+table.steelBlueCols thead th:first-child {
+    border-left: none;
+}
+
+table.steelBlueCols tfoot td {
+    font-size: 13px;
+}
+table.steelBlueCols tfoot .links {
+    text-align: right;
+}
+table.steelBlueCols tfoot .links a{
+    display: inline-block;
+    background: #FFFFFF;
+    color: #398AA4;
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
+.buttonModifica,
+.buttonElimina{
+    padding: 5px 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: medium;
+    background-color: #398AA4;
+    color: white;
+    margin-right: 2px;
+    transition:all 250ms ease-in;
+}
+
+.buttonModifica:hover,
+.buttonElimina:hover{
+    transform: scale(1.15);
+    background-color: #7eb3c5;
+}
+
+.buttonModifica:focus,
+.buttonElimina:focus{
+    outline: none;
+}

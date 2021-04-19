@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/stileHome.css}" href="/css/stileHome.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+    <meta charset="UTF-8">
+
+    <title>Home</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #398AA4;">
+    <span id="nomeUtente" class="navbar-brand mb-0 h1 text-light" th:text="${nomeUtente}">Navbar</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link text-light" href="/home">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Altre Opzioni
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/elencoNegozi">Gestisci Partner</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <a class="navbar-brand mb-0 h1 text-light" href="/logout">Logout</a>
+</nav>
+<p>
+<div class="d-flex justify-content-center">
+    <form class="form-inline" th:action="@{/search}" method="post">
+        <input name="dati" class="form-control mr-sm-2" type="search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+    </form>
+    <form class="form-inline" th:action="@{/home}" method="get">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Reset</button>
+    </form>
+</div>
+</p>
+<p>
+<div class="d-flex justify-content-center">
+    <div class="table-responsive">
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th>Email</th>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Punteggio</th>
+                <th>Aggiungi / Sottrai</th>
+                <th>Elimina Utente</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="Utente : ${Utenti}">
+                <td th:text="${Utente.email}">Utente</td>
+                <td th:text="${Utente.nome}">Nome</td>
+                <td th:text="${Utente.cognome}">Cognome</td>
+                <td th:text="${Utente.punteggio}">Punteggio</td>
+                <td>
+                    <form class="form-inline" th:action="@{/setPunteggio}" method="post">
+                        <input name="punteggio" class="form-control mr-sm-2" type="search" aria-label="Search">
+                        <input name="email" type="hidden" th:value="${Utente.email}">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Aggiorna</button>
+                    </form>
+                </td>
+                <td>
+                    <form class="form-inline" th:action="@{/eliminaUtente}" method="post">
+                        <input name="email" type="hidden" th:value="${Utente.email}">
+                        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Elimina</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</p>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+</body>
+</html>
